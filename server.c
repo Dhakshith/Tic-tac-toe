@@ -72,13 +72,18 @@ int main(int argc, char **argv) {
 						realerr("Accept() failed");
 				}
 
-				memset(recvline, 0, MAXLINE);
-				if ((n = recv(itr == 0 ? connfdX : connfdO, recvline, MAXLINE, 0)) <= 0)
-					continue;
+				printf("Someone got connected\n");
 
-				if (n == MAXLINE || n <= 7 || !Compare(recvline, "search ") || !onespacer(recvline, n) || !onlyletnumsym(recvline + 7, n - 7))
+				memset(recvline, 0, MAXLINE);
+				if ((n = recv(itr == 0 ? connfdX : connfdO, recvline, MAXLINE, 0)) <= 0) {
+					printf("Smthng wrng\n");
 					continue;
-				else {
+				}
+
+				if (n == MAXLINE || n <= 7 || !Compare(recvline, "search ") || !onespacer(recvline, n) || !onlyletnumsym(recvline + 7, n - 7)) {
+					printf("Smthng wrng\n");
+					continue;
+				} else {
 					strncpy(itr == 0 ? XName : OName, recvline + 7, n - 7);
 					(itr == 0 ? XName : OName)[n - 7] = '\0';
 					break;
@@ -93,6 +98,7 @@ int main(int argc, char **argv) {
 		sprintf(sendline, "X%s", OName);
 		sendbytes = strlen(sendline);
 		if (write(connfdX, sendline, sendbytes) != sendbytes) {
+			printf("Unable to write");
 			write(connfdO, "D", 1);
 			close(connfdO);
 		}
@@ -100,6 +106,7 @@ int main(int argc, char **argv) {
 		sprintf(sendline, "O%s", XName);
 		sendbytes = strlen(sendline);
 		if (write(connfdO, sendline, sendbytes) != sendbytes) {
+			printf("Unable to write");
 			write(connfdO, "D", 1);
 			close(connfdO);
 		}
