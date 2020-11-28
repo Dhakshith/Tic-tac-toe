@@ -77,14 +77,12 @@ int main(int argc, char **argv) {
 
 				memset(recvline, 0, MAXLINE);
 				if ((n = recv(itr == 0 ? connfdX : connfdO, recvline, MAXLINE, 0)) <= 0) {
-					printf("Smthng wrng\n");
-					fflush(stdout);
+					realerr();
 					continue;
 				}
 
 				if (n == MAXLINE || n <= 7 || !Compare(recvline, "search ") || !onespacer(recvline, n) || !onlyletnumsym(recvline + 7, n - 7)) {
-					printf("Smthng wrng\n");
-					fflush(stdout);
+					realerr();
 					continue;
 				} else {
 					strncpy(itr == 0 ? XName : OName, recvline + 7, n - 7);
