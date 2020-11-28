@@ -16,7 +16,6 @@
 #include <netdb.h>
 #include <time.h>
 
-#define SERVER_PORT 80
 #define MAXNAME 32
 #define MAXLINE (7 + MAXNAME + 1)
 
@@ -31,6 +30,7 @@ char Compare(uint8_t const *, uint8_t const *);
 char boardState(uint16_t, uint16_t);
 
 int main(int argc, char **argv) {
+	unsigned int SERVER_PORT = Atoui(getenv("PORT"));
 	int listenfd, connfdX, connfdO, sendbytes, n;
 	struct sockaddr_in servaddr;
 	uint8_t sendline[MAXNAME + 2], recvline[MAXLINE], XName[MAXNAME + 1], OName[MAXNAME + 1];
