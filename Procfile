@@ -1,1 +1,1 @@
-service: ./server
+web: ./server
