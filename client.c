@@ -60,7 +60,7 @@ int main(void) {
 	servaddr.sin_family = AF_INET;
 	servaddr.sin_port = htons(SERVER_PORT);
 
-	inet_pton(AF_INET, "127.0.0.1", &servaddr.sin_addr);
+	inet_pton(AF_INET, inet_ntoa(gethostbyname("ticktacktoe.herokuapp.com")->h_addr), &servaddr.sin_addr);
 
 	if (connect(sockfd, (struct sockaddr *) &servaddr, sizeof servaddr) == -1)
 		realerr("Connect() failed");
