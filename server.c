@@ -85,8 +85,11 @@ int main(int argc, char **argv) {
 					printf("Someone gave this thing dude %s %d\n", recvline, n);
 					continue;
 				} else {
+					printf("SOme dude really did something good\n");
 					strncpy(itr == 0 ? XName : OName, recvline + 7, n - 7);
 					(itr == 0 ? XName : OName)[n - 7] = '\0';
+					printf("%s\n", itr == 0 ? XName : OName);
+					fflush(stdout);
 					break;
 				}
 			}
