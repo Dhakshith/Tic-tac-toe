@@ -78,6 +78,7 @@ int main(int argc, char **argv) {
 				memset(recvline, 0, MAXLINE);
 				if ((n = recv(itr == 0 ? connfdX : connfdO, recvline, MAXLINE, 0)) <= 0) {
 					printf("Smthng wrng\n");
+					fflush(stdout);
 					continue;
 				}
 
