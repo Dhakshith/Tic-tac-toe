@@ -76,13 +76,13 @@ int main(int argc, char **argv) {
 				fflush(stdout);
 
 				memset(recvline, 0, MAXLINE);
-				if ((n = recv(itr == 0 ? connfdX : connfdO, recvline, MAXLINE, 0)) <= 0) {
+				if ((n = recv(itr == 0 ? connfdX : connfdO, recvline, MAXLINE, 0)) == -1) {
 					realerr();
 					continue;
 				}
 
 				if (n == MAXLINE || n <= 7 || !Compare(recvline, "search ") || !onespacer(recvline, n) || !onlyletnumsym(recvline + 7, n - 7)) {
-					realerr();
+					printf("Someone gave this thing dude %s %d\n", recvline, n);
 					continue;
 				} else {
 					strncpy(itr == 0 ? XName : OName, recvline + 7, n - 7);
