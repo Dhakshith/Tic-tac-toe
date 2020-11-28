@@ -28,6 +28,7 @@ char onespacer(uint8_t const *, int);
 char onlyletnumsym(uint8_t const *, int);
 char Compare(uint8_t const *, uint8_t const *);
 char boardState(uint16_t, uint16_t);
+unsigned int Atoui(char const *);
 
 int main(int argc, char **argv) {
 	unsigned int SERVER_PORT = Atoui(getenv("PORT"));
@@ -194,4 +195,15 @@ char boardState(uint16_t XBoard, uint16_t OBoard) {
 		return 1;
 
 	return 0;
+}
+
+unsigned int Atoui(char const *str) {
+	unsigned int retval = 0;
+
+	while (*str) {
+		retval = retval * 10 + *str - '0';
+		str++;
+	}
+
+	return retval;
 }
