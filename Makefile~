@@ -1,2 +1,0 @@
-Bot:
-	gcc -o server server.c
